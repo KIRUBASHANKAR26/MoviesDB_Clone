@@ -1,0 +1,29 @@
+.footer-wrapper{
+    background: #03243E;
+    color: #fff;
+    padding: 1rem ;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+.footer-wrapper li{
+    list-style-type: none;
+    padding-left: 2rem;
+}
+.footer-wrapper h5{
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+}
+.footer-wrapper button{
+    padding: 0.75rem 1.3rem;
+    background: #fff;
+    color: #235EA7;
+    font-weight: 900;
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

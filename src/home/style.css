@@ -1,0 +1,40 @@
+.scrollbar::-webkit-scrollbar {
+    height: 12px;  
+    width: 10px;            
+}
+.scrollbar::-webkit-scrollbar-track {
+    background: #fff;        
+}
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;    
+    border-radius: 2rem;       
+    border: 3px solid #fff;  
+}
+body::-webkit-scrollbar {
+    width: 12px;              
+}
+body::-webkit-scrollbar-track {
+    background: #fff;       
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb98;
+    border-radius: 2rem;       
+    border: 3px solid #fff;  
+}
+.joinToday-wrapper{
+    color: #fff;
+    margin:1rem 7%;
+    padding:2rem 1rem;
+    background: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces_filter(duotone,190235,ad47dd)/lMnoYqPIAVL0YaLP5YjRy7iwaYv.jpg") no-repeat top center;
+    background-size: cover;
+}
+.signIn-btn{
+    color: #fff;
+    background: #805BE7;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
