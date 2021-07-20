@@ -7,6 +7,7 @@ import Freetowatch from '../components/MoviesScroll/freeTowatch';
 import "./style.css"
 import Trendingmovies from '../components/MoviesScroll/trending';
 import Footer from '../components/footer';
+import Banner from '../components/topbar/banner';
 
 const Home = () => {
 
@@ -36,6 +37,7 @@ const Home = () => {
 
     return ( <div>
         <Topbar/>
+        <Banner/>
         <h4 style={{paddingTop:"6rem",paddingLeft:"7%"}}>
             What's Popular
         </h4>
