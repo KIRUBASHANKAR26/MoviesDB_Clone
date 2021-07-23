@@ -1,3 +1,4 @@
+
 .movie-infos{
     display: flex;
     justify-content: center;
@@ -9,7 +10,7 @@
     background-image: linear-gradient(to right, rgba(8.24%, 9.41%, 9.80%, 1.00) 150px, rgba(8.24%, 9.41%, 9.80%, 0.84) 100%);
 }
 .movie-infos .right{
-    width: 50%;
+    width: 63%;
 }
 .bg-image{
     position: absolute;
@@ -64,4 +65,13 @@
     border: none;
     background: unset;
     outline: none;
+}
+.profile-info{
+    width: 140px;
+    line-height: 1;
+    height: 100px;
+    padding: 0.5rem;
+}
+.social-media-wrapper a:not(:hover){
+    color: #000;
 }
