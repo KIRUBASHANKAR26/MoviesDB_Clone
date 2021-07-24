@@ -8,6 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 import ReactPlayer from "react-player";
 import Topbar from '../topbar';
 import NumberFormat from 'react-number-format';
+import LocaleCode from 'locale-code'
 
 
 
@@ -182,6 +183,7 @@ const Moviesdetails = () => {
                             <h6>Status</h6>
                             <p>{movieData.status}</p>
                             <h6>Orginal Language</h6>
+                            {console.log(LocaleCode.getLanguages(['en'])) }
                             <p>English</p>
                             <h6>Budget</h6>
                             <NumberFormat value={movieData.budget} displayType={'text'} thousandSeparator={true} prefix={'$'} />
