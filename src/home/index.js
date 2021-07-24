@@ -8,39 +8,66 @@ import "./style.css"
 import Trendingmovies from '../components/MoviesScroll/trending';
 import Footer from '../components/footer';
 import Banner from '../components/topbar/banner';
+import Buttongroups from '../components/capsuleButton';
 
 const Home = () => {
 
     const [movies, setMovies] = useState([])
     const [freeMovies, setfreeMovies] = useState([])
     const [trendingMovies, serTrendingMovies] = useState([])
-    // Get the data from the API of MoviesDB
+    const [popularMoviesPage, setPopularMoviesPage] = useState(1)
+    const [freeTowatchPage, setFreeTowatchPage] = useState(1)
+    const [trendingPage, setTrendingPage] = useState(1)
 
     useEffect(() => {    
-        axios.get(API_URL)
+        axios.get(`${API_URL}${popularMoviesPage}`)
             .then((res)=>{
                 console.log(res.data.results)
                 setMovies(res.data.results)
         })
-        axios.get(Free_to_watch)
+        axios.get(`${Free_to_watch}${freeTowatchPage}&with_watch_monetization_types=free`)
             .then((res)=>{
                 console.log(res.data.results)
                 setfreeMovies(res.data.results)
         })
-        axios.get(Trending_movie)
+        axios.get(`${Trending_movie}${trendingPage}`)
             .then((res)=>{
                 console.log(res.data.results)
                 serTrendingMovies(res.data.results)
         })
-    }, [])
+    },[setMovies,setfreeMovies,serTrendingMovies,popularMoviesPage,freeTowatchPage,trendingPage])
 
+    const getThepage = (e) => {
+        let page = e.target.id;
+        setPopularMoviesPage(page + 1);
+      };
+
+    const freeMoviesPage = (e) => {
+        let page = e.target.id;
+        setFreeTowatchPage(page + 1);
+    };
+
+    const trendPage = (e) => {
+        console.log(e.target.id)
+        let page = e.target.id;
+        setTrendingPage(page + 1);
+    }
 
     return ( <div>
         <Topbar/>
         <Banner/>
-        <h4 style={{paddingTop:"6rem",paddingLeft:"7%"}}>
-            What's Popular
-        </h4>
+        <div style={{paddingTop: "5rem"}} className="column-wrapper">
+            <div className="content-wrapper Popular">
+                <div className="column">
+                    <div className="column-header">
+                        <h4>What's Popular</h4>
+                        <Buttongroups buttons={["Streaming", "On TV", "For Rent","In theaters"]}
+                        doSomethingAfterClick={getThepage}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
             movies?.map((movie, index) =>
                 <React.Fragment  key={index}>
@@ -54,9 +81,18 @@ const Home = () => {
                 </React.Fragment>   
             )
         }</div>
-        <h4 style={{paddingTop:"1rem",paddingLeft:"7%"}}>
-            Free TO Watch
-        </h4>
+        <div className="column-wrapper">
+            <div className="content-wrapper Popular">
+                <div className="column">
+                    <div className="column-header">
+                        <h4>Free TO Watch</h4>
+                        <Buttongroups buttons={["Movies", "TV"]}
+                        doSomethingAfterClick={freeMoviesPage}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
             freeMovies?.map((movie, index) =>
                 <React.Fragment  key={index}>
@@ -71,9 +107,18 @@ const Home = () => {
             )
         }</div>
 
-        <h4 style={{paddingTop:"1rem",paddingLeft:"7%"}}>
-                    Trending Movies
-        </h4>
+        <div className="column-wrapper">
+            <div className="content-wrapper Popular">
+                <div className="column">
+                    <div className="column-header">
+                        <h4>Trending</h4>
+                        <Buttongroups buttons={["Today", "This Week"]}
+                        doSomethingAfterClick={trendPage}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
             trendingMovies?.map((movie, index) =>
                 <React.Fragment  key={index}>
