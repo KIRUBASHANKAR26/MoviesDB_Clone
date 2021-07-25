@@ -9,6 +9,7 @@ import Trendingmovies from '../components/MoviesScroll/trending';
 import Footer from '../components/footer';
 import Banner from '../components/topbar/banner';
 import Buttongroups from '../components/capsuleButton';
+import {Skeletonloader} from '../components/skeletonLoader';
 
 const Home = () => {
 
@@ -18,39 +19,52 @@ const Home = () => {
     const [popularMoviesPage, setPopularMoviesPage] = useState(1)
     const [freeTowatchPage, setFreeTowatchPage] = useState(1)
     const [trendingPage, setTrendingPage] = useState(1)
+    const [loader, setLoader] = useState(true)
+    const [freeMovieloader, setfreeMovieloader] = useState(true)
+    const [trendMovieloader, settrendMovieloader] = useState(true)
+
 
     useEffect(() => {    
         axios.get(`${API_URL}${popularMoviesPage}`)
             .then((res)=>{
-                console.log(res.data.results)
                 setMovies(res.data.results)
+                setLoader(false)
         })
+    },[setMovies,popularMoviesPage,setLoader])
+
+    useEffect(() => {
         axios.get(`${Free_to_watch}${freeTowatchPage}&with_watch_monetization_types=free`)
             .then((res)=>{
-                console.log(res.data.results)
                 setfreeMovies(res.data.results)
+                setfreeMovieloader(false)
         })
+    }, [setfreeMovies,freeTowatchPage,setfreeMovieloader])
+
+    useEffect(() => {
         axios.get(`${Trending_movie}${trendingPage}`)
             .then((res)=>{
-                console.log(res.data.results)
                 serTrendingMovies(res.data.results)
+                settrendMovieloader(false)
         })
-    },[setMovies,setfreeMovies,serTrendingMovies,popularMoviesPage,freeTowatchPage,trendingPage])
+    }, [serTrendingMovies,trendingPage,settrendMovieloader])
 
     const getThepage = (e) => {
         let page = e.target.id;
         setPopularMoviesPage(page + 1);
+        setLoader(!loader)
       };
 
     const freeMoviesPage = (e) => {
         let page = e.target.id;
         setFreeTowatchPage(page + 1);
+        setfreeMovieloader(!freeMovieloader)
     };
 
     const trendPage = (e) => {
         console.log(e.target.id)
         let page = e.target.id;
         setTrendingPage(page + 1);
+        settrendMovieloader(!trendMovieloader)
     }
 
     return ( <div>
@@ -69,7 +83,8 @@ const Home = () => {
             </div>
         </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
-            movies?.map((movie, index) =>
+            loader ? <Skeletonloader />:
+            (movies?.map((movie, index) =>
                 <React.Fragment  key={index}>
                         <PopularMovies 
                             image={`${IMG_PATH}/${movie.poster_path}`}
@@ -79,8 +94,8 @@ const Home = () => {
                             rate={movie.vote_average}
                         /> 
                 </React.Fragment>   
-            )
-        }</div>
+            ))
+    }</div>
         <div className="column-wrapper">
             <div className="content-wrapper Popular">
                 <div className="column">
@@ -94,7 +109,7 @@ const Home = () => {
             </div>
         </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
-            freeMovies?.map((movie, index) =>
+            freeMovieloader ? <Skeletonloader />: (freeMovies?.map((movie, index) =>
                 <React.Fragment  key={index}>
                         <Freetowatch 
                             image={`${IMG_PATH}/${movie.poster_path}`}
@@ -104,7 +119,7 @@ const Home = () => {
                             rate={movie.vote_average}
                         /> 
                 </React.Fragment>   
-            )
+            ))
         }</div>
 
         <div className="column-wrapper">
@@ -120,7 +135,7 @@ const Home = () => {
             </div>
         </div>
         <div className="scrollbar" style={{display:"flex", gap:"1rem",overflowX: "auto",width: "86%",margin:" 0 auto"}}>{
-            trendingMovies?.map((movie, index) =>
+            trendMovieloader ? <Skeletonloader />: (trendingMovies?.map((movie, index) =>
                 <React.Fragment  key={index}>
                         <Trendingmovies 
                             image={`${IMG_PATH}/${movie.poster_path}`}
@@ -130,7 +145,7 @@ const Home = () => {
                             rate={movie.vote_average}
                         /> 
                 </React.Fragment>
-            )
+            ))
         }</div>
 
         <section className="joinToday-wrapper">

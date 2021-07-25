@@ -8,8 +8,8 @@ import "react-circular-progressbar/dist/styles.css";
 import ReactPlayer from "react-player";
 import Topbar from '../topbar';
 import NumberFormat from 'react-number-format';
-import LocaleCode from 'locale-code'
-
+import LocaleCode from 'locale-code';
+import Skeleton  from "react-loading-skeleton";
 
 
 const Moviesdetails = () => {
@@ -20,10 +20,14 @@ const Moviesdetails = () => {
     const [casts, setCasts] = useState([])
     const [count, setCount] = useState(12)
     const [socialMedia, setSocialMedia] = useState([])
+    const [bannerLoader, setBannerLoader] = useState(true)
 
      useEffect(() => {
         axios(`${moviesDB_URL}/movie/${movieid}?api_key=${API_KEY}&language=en-US`)
-        .then((res) => setMovieData(res.data))
+        .then((res) => {
+            setMovieData(res.data)
+            setBannerLoader(false)
+        })
         .catch((err)=> console.log(err));
 
         //YouTube key
@@ -67,7 +71,21 @@ const Moviesdetails = () => {
     return ( <div>
         <Topbar/>
         {
-            movieData && 
+            // Loader---------------
+            bannerLoader?
+            <div style={{display:"flex",gap:"4rem",justifyContent:"center"}}> 
+                <Skeleton style={{ borderRadius: "1rem" }} width={300} height={422}/>
+                <div>
+                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem"}} count={2} width={400} />
+                    <Skeleton circle={true} height={75} width={75} />
+                    <Skeleton circle={true} height={50} width={50} />
+                    <Skeleton circle={true} height={50} width={50} />
+                    <Skeleton circle={true} height={50} width={50} />
+                    <Skeleton circle={true} height={50} width={50} />
+                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem"}} count={2} width={400} />
+
+                </div>
+            </div>:(movieData && 
             <div className="movie-infos">
                 <div className="left">
                     <img style={{width:"300px"}} src={`${IMG_PATH}/${movieData.poster_path}`} alt={movieData.title} title={movieData.title}/>
@@ -146,7 +164,7 @@ const Moviesdetails = () => {
                     </div>    
                     <p style={{paddingTop:"1rem"}}>OVERVIEW:<br/>{movieData.overview}</p>
                 </div>
-            </div>
+            </div>)
         }
         <div style={{display:"flex",margin:"1rem 0"}}>
             <div style={{maxWidth:"70%"}}>
@@ -155,7 +173,7 @@ const Moviesdetails = () => {
                 {
                     casts.slice(0,count).map((cast,index) => 
                     <div key={index} style={{boxShadow: "0 2px 8px rgb(0 0 0 / 10%)",display: "inline-block",borderRadius: "1rem"}}>
-                        <img style={{width:"100px", width: "140px",objectFit: "cover",height: "170px",objectPosition: "top center",borderRadius:"1rem 1rem 0 0"}} 
+                        <img style={{width: "140px",objectFit: "cover",height: "170px",objectPosition: "top center",borderRadius:"1rem 1rem 0 0"}} 
                         onError={(e)=>{e.target.onerror = null; e.target.src="https://www.hhcenter.org/wp-content/uploads/2017/02/person-placeholder.jpg"}}
                         src={`${IMG_PATH}/${cast.profile_path}`} title={cast.name} alt={cast.name}/>
                         <div className="profile-info">
