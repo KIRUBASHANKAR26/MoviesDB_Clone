@@ -119,3 +119,20 @@ div.selector h3{
     pointer-events: none;
     transition: left 0.25s;
 }
+.mobile-selector{
+    display: none;
+}
+@media  screen and (max-width:767px) {
+    .mobile-selector{
+        display: inline-block !important;
+        margin-left: 1rem;
+    }
+    .selector{
+        display: none !important;
+        
+    }
+    .button-content button{
+        order: 2;
+        margin: 1rem 0.15rem !important;
+    }
+}

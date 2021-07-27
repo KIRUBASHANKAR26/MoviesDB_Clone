@@ -2,6 +2,8 @@
     background: #03243E;
     color: #fff;
     padding: 1rem ;
+    display: flex;
+    justify-content: space-around;
 }
 a{
     text-decoration: none;
@@ -9,7 +11,6 @@ a{
 }
 .footer-wrapper li{
     list-style-type: none;
-    padding-left: 2rem;
 }
 .footer-wrapper h5{
     font-size: 1.3rem;
@@ -26,4 +27,9 @@ a{
     outline: none;
     border-radius: 0.5rem;
     cursor: pointer;
+}
+@media screen and (max-width:767px){
+    .footer-wrapper{
+        flex-direction: column;
+    }
 }

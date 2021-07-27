@@ -5,7 +5,12 @@ import "./style.css";
 const Footer = () => {
     return ( 
         <section className="footer-wrapper">
-            <button>JOIN THE COMMUNITY</button>
+            <div>
+                <img style={{width:"150px",display:"block"}} src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="logo" />
+                <button style={{margin:"1rem 0"}}>JOIN THE COMMUNITY</button>
+
+            </div>
+            
             <div>
                 <h5>THE BASICS</h5>
                 <li><a href="/#" rel="noopener noreferrer">About TMDb</a></li>

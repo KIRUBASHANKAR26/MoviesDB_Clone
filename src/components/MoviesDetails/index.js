@@ -10,6 +10,7 @@ import Topbar from '../topbar';
 import NumberFormat from 'react-number-format';
 import LocaleCode from 'locale-code';
 import Skeleton  from "react-loading-skeleton";
+import Footer from '../footer/index';
 
 
 const Moviesdetails = () => {
@@ -73,16 +74,16 @@ const Moviesdetails = () => {
         {
             // Loader---------------
             bannerLoader?
-            <div style={{display:"flex",gap:"4rem",justifyContent:"center"}}> 
+            <div style={{display:"flex",gap:"4rem",justifyContent:"center",marginTop:"1rem"}}> 
                 <Skeleton style={{ borderRadius: "1rem" }} width={300} height={422}/>
                 <div>
-                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem"}} count={2} width={400} />
+                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem",maxWidth:"400px"}} count={2} width={400} />
                     <Skeleton circle={true} height={75} width={75} />
                     <Skeleton circle={true} height={50} width={50} />
                     <Skeleton circle={true} height={50} width={50} />
                     <Skeleton circle={true} height={50} width={50} />
                     <Skeleton circle={true} height={50} width={50} />
-                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem"}} count={2} width={400} />
+                    <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem",maxWidth:"800px"}} count={3} width={800} />
 
                 </div>
             </div>:(movieData && 
@@ -92,17 +93,17 @@ const Moviesdetails = () => {
                     <img className="bg-image" src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movieData.backdrop_path}`} alt={movieData.title}/>
                 </div>
                 <div className="right">
-                    <h1>{movieData.title}</h1>
-                    <div>{movieData.release_date}
+                    <h1 class="movieTitle">{movieData.title}</h1>
+                    <div className="generic">{movieData.release_date}
                         <span>{
                         movieData.genres?.map((genre,index) => <ul key={index} style={{listStyleType:"none",display:"inline-block"}}>
                             <li>{genre.name}</li>
                         </ul>)
                         }</span>
-                        <span>{convertMinsToHrsMins(movieData.runtime)}</span>
+                        <span style={{paddingLeft:"0.5rem"}}>{ convertMinsToHrsMins(movieData.runtime) }</span>
                     </div>
                     <div className="button-content">
-                        <div className="progrees-bar" style={{width: "70px", height: "70px", borderRadius: "50%", boxShadow: "0px 0px 2px 3px #032541", background: "#081C22",display:"inline-block"}}>
+                        <div className="progrees-bar" style={{width: "70px", height: "70px", borderRadius: "50%", boxShadow: "0px 0px 2px 3px #032541", background: "#081C22",display:"inline-block",order: "0"}}>
                             <CircularProgressbar value={`${movieData.vote_average * 10}`} text={`${movieData.vote_average * 10}%`}
                             styles={{
                                 trail: {
@@ -142,11 +143,11 @@ const Moviesdetails = () => {
                                 grade
                             </span>
                         </button>
-                        <div style={{cursor:"pointer",fontSize:"1.3rem", display:"inline-block",marginLeft:"1rem"}} onClick={playTrailer}><i className="fas fa-play"></i>
+                        <div class="trailer" style={{cursor:"pointer",fontSize:"1.3rem", display:"inline-block",marginLeft:"1rem",order:'1',flex:"50%"}} onClick={playTrailer}><i className="fas fa-play"></i>
                             Play Trailer
                             <div className={trailerPlayer?"close-button active":"close-button"}>
                                 Trailer Player
-                                <button onClick={closeButton}><i style={{textAlign:"right"}}className="far fa-window-close"></i></button>
+                                <button onClick={closeButton}><i style={{textAlign:"right", order:'2'}}className="far fa-window-close"></i></button>
                             </div>
                             {
                                 trailerPlayer && <ReactPlayer
@@ -166,8 +167,8 @@ const Moviesdetails = () => {
                 </div>
             </div>)
         }
-        <div style={{display:"flex",margin:"1rem 0"}}>
-            <div style={{maxWidth:"70%"}}>
+        <div className="movies-info-wrapper" style={{display:"flex",margin:"1rem 0"}}>
+            <div className="cast-wrapper" style={{maxWidth:"70%"}}>
             <h4 style={{margin:"0 7% 1rem", fontSize:"2rem"}}>Top Billed Cast</h4>
             { <div className="scrollbar" style={{display: "flex",gap: "1rem",overflowX: "auto",margin: "0rem 7%",padding: "1rem 0"}}>
                 {
@@ -214,7 +215,7 @@ const Moviesdetails = () => {
             </div>
             {console.log(socialMedia)}
         </div>
-        
+        <Footer/>
     </div> );
 }
  

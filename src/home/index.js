@@ -49,7 +49,7 @@ const Home = () => {
     }, [serTrendingMovies,trendingPage,settrendMovieloader])
 
     const getThepage = (e) => {
-        let page = e.target.id;
+        let page = e.target.value;
         setPopularMoviesPage(page + 1);
         setLoader(!loader)
       };
@@ -70,7 +70,7 @@ const Home = () => {
     return ( <div>
         <Topbar/>
         <Banner/>
-        <div style={{paddingTop: "5rem"}} className="column-wrapper">
+        <div style={{paddingTop: "1rem"}} className="column-wrapper">
             <div className="content-wrapper Popular">
                 <div className="column">
                     <div className="column-header">

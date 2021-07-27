@@ -75,3 +75,41 @@
 .social-media-wrapper a:not(:hover){
     color: #000;
 }
+
+@media screen and (max-width:767px) {
+    .cast-wrapper{
+        max-width: 50% !important;
+    }
+    .movies-info-wrapper{
+        display: flex;
+        margin: 1rem 0px;
+        width: 100%;
+        justify-content: center;
+    }
+    .right ul{
+        padding:0 0 0 0.4rem !important ;
+    }
+    .right .generic{
+        text-align: center;
+    }
+    .movieTitle{
+        text-align: center;
+    }
+    .button-content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .trailer{
+        cursor: pointer;
+        font-size: 1.3rem;
+        display: inline-block;
+        flex: 50%;
+        margin-left: 1rem;
+        order: 1;
+        gap: 1rem;
+        border-left: 1px solid;
+        padding-left: 1rem;
+    }
+}

@@ -28,18 +28,23 @@ h2{
 }
 .search-wrapper{
     position: relative;
-    padding: 1rem 9%;
+    padding: 2rem 9% 5rem;
 }
 .search-wrapper button{
     border: none;
     border-radius: 2rem;
     padding:0.75rem 1.5rem;
     position: absolute;
-    top: 1rem;
+    top: 2rem;
     background: linear-gradient(to right, rgba(30,213,169,1) 0%, rgba(1,180,228,1) 100%);
     right: 9%;
     color: #fff;
     font-weight: 600;
+}
+.banner-bg{
+    background:linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%) no-repeat;
+    background-size: 75%;
+    background-position: 28%;
 }
 
 @media screen and (max-width:767px){
@@ -48,8 +53,12 @@ h2{
     }
     .banner-wrapper img{
         padding: 0;
+        height: 100%
     }
     nav{
         padding: 0 2rem !important;
+    }
+    .banner-bg{
+        background-position: unset;
     }
 }
