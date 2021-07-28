@@ -11,6 +11,8 @@ import NumberFormat from 'react-number-format';
 import LocaleCode from 'locale-code';
 import Skeleton  from "react-loading-skeleton";
 import Footer from '../footer/index';
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Moviesdetails = () => {
@@ -22,6 +24,15 @@ const Moviesdetails = () => {
     const [count, setCount] = useState(12)
     const [socialMedia, setSocialMedia] = useState([])
     const [bannerLoader, setBannerLoader] = useState(true)
+    const [spinnerLoader, setSpinnerLoader] = useState(false)
+
+    const override = css`
+    position: fixed;
+    top: 40%;
+    left: 45%;
+    transform:translateX(50%) !important;
+        `;
+    
 
      useEffect(() => {
         axios(`${moviesDB_URL}/movie/${movieid}?api_key=${API_KEY}&language=en-US`)
@@ -33,7 +44,10 @@ const Moviesdetails = () => {
 
         //YouTube key
         axios(`${moviesDB_URL}/movie/${movieid}/videos?api_key=${API_KEY}`)
-        .then((res) => setYoutubeKey(res.data.results[0].key))
+        .then((res) => {
+            setYoutubeKey(res.data.results[0].key)
+           // setSpinnerLoader(false)
+        })
         .catch((err)=> console.log(err));
 
         //cast and crew
@@ -60,6 +74,7 @@ const Moviesdetails = () => {
     const playTrailer = () => {
         console.log("youtubeKey",youtubeKey)
         settrailerPlayer(!trailerPlayer)
+        setSpinnerLoader(!spinnerLoader)
     }
     const closeButton = () => {
         settrailerPlayer(trailerPlayer)
@@ -150,13 +165,14 @@ const Moviesdetails = () => {
                                 <button onClick={closeButton}><i style={{textAlign:"right", order:'2'}}className="far fa-window-close"></i></button>
                             </div>
                             {
-                                trailerPlayer && <ReactPlayer
+                                trailerPlayer && <><ClipLoader color="white" loading={spinnerLoader} css={override} size={100} />
+                                <ReactPlayer
                                 url={`${YOUTUBE_URL}${youtubeKey}`}
                                 className='react-player'
                                 controls
                                 width='50%'
                                 height='80%'
-                                />
+                                /></>
                             }
                             
                             
@@ -167,7 +183,7 @@ const Moviesdetails = () => {
                 </div>
             </div>)
         }
-        <div className="movies-info-wrapper" style={{display:"flex",margin:"1rem 0"}}>
+        <div className="movies-info-wrapper" style={{display:"flex",margin:"1rem 0",flexWrap:"wrap"}}>
             <div className="cast-wrapper" style={{maxWidth:"70%"}}>
             <h4 style={{margin:"0 7% 1rem", fontSize:"2rem"}}>Top Billed Cast</h4>
             { <div className="scrollbar" style={{display: "flex",gap: "1rem",overflowX: "auto",margin: "0rem 7%",padding: "1rem 0"}}>
