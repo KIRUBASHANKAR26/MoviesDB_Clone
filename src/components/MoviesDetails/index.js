@@ -56,12 +56,11 @@ const Moviesdetails = () => {
         .then((res) =>setCasts(res.data.cast))
         .catch((err)=> console.log(err))
         
-
         //social media
         axios(`${moviesDB_URL}/movie/${movieid}/external_ids?api_key=${API_KEY}`)
         .then((res) =>setSocialMedia(res.data))
         .catch((err)=> console.log(err))
-     }, [])
+     }, [movieid])
 
      ///-----------Convert the time, Minutes to hour
     const convertMinsToHrsMins = (mins) => {
@@ -72,7 +71,6 @@ const Moviesdetails = () => {
         return `${h + "h"}${m + "m"}`;
     }
     const playTrailer = () => {
-        console.log("youtubeKey",youtubeKey)
         settrailerPlayer(!trailerPlayer)
         setSpinnerLoader(!spinnerLoader)
     }
@@ -89,7 +87,7 @@ const Moviesdetails = () => {
         {
             // Loader---------------
             bannerLoader?
-            <div style={{display:"flex",gap:"4rem",justifyContent:"center",marginTop:"1rem"}}> 
+            <div style={{display:"flex",gap:"4rem",justifyContent:"center",marginTop:"1rem",flexWrap:"wrap"}}> 
                 <Skeleton style={{ borderRadius: "1rem" }} width={300} height={422}/>
                 <div>
                     <Skeleton style={{padding:"0.5rem",display:"block",marginTop:"1rem",maxWidth:"400px"}} count={2} width={400} />
@@ -229,7 +227,6 @@ const Moviesdetails = () => {
                     }
                 </div>
             </div>
-            {console.log(socialMedia)}
         </div>
         <Footer/>
     </div> );

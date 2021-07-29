@@ -12,11 +12,9 @@ const Banner = ({dynamicBg}) => {
 
   const searchBtn = (e) => {
     e.preventDefault();
-    console.log(search);
     setsearch("")
   }
 
-  //console.log(dynamicBg);
 
   return ( <div className="banner-wrapper">
     <div className="banner-bg">{

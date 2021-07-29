@@ -25,7 +25,8 @@ const Searchpage = () => {
             
         })
         .catch((err) => console.log(err))
-    }, [])
+        console.log(searchquery)
+    }, [searchquery])
 
     
 

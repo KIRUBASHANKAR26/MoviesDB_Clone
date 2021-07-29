@@ -13,10 +13,9 @@ const Movies = () => {
     const [currentPage, setCurrentPage] = useState(1)
     
     useEffect(() => {
-        console.log(currentPage)
         let endpoint = `${API_URL}${currentPage}`
         fetchMovies(endpoint);
-    }, [])
+    },[currentPage,API_URL])
 
     const fetchMovies = (path) => {
         axios.get(path)
@@ -28,7 +27,6 @@ const Movies = () => {
     }
     const handelLoadmore = () => {
         setLoader(loader)
-        console.log(currentPage + 1)
         let endpoint = `${API_URL}${currentPage + 1}`
         fetchMovies(endpoint);
     }

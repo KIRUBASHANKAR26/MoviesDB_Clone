@@ -66,8 +66,6 @@ const Home = () => {
         settrendMovieloader(!trendMovieloader)
     }
 
-   // console.log(movies[Math.floor(Math.random() * ((movies.length-1) - 0 + 1)) + 0]);
-
     return ( <div>
         <Topbar/>{
             movies && <Banner dynamicBg={movies[Math.floor(Math.random() * ((movies.length-1) - 0 + 1)) + 0]}/>
