@@ -101,8 +101,8 @@ const Moviesdetails = () => {
             </div>:(movieData && 
             <div className="movie-infos">
                 <div className="left">
-                    <img style={{width:"300px"}} src={movieData.poster_path!= null ?`${IMG_PATH}/${movieData.poster_path}`:"https://www.dentzap.co.uk/assets/core/img/default-placeholder.png"} alt={movieData.title} title={movieData.title}/>
-                    <img className="bg-image" src={movieData.backdrop_path!= null ?`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movieData.backdrop_path}`:"https://www.dentzap.co.uk/assets/core/img/default-placeholder.png"} 
+                    <img style={{width:"300px"}} src={movieData.poster_path!= null ?`${IMG_PATH}/${movieData.poster_path}`:"https://i1.wp.com/www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg?ssl=1"} alt={movieData.title} title={movieData.title}/>
+                    <img className="bg-image" src={movieData.backdrop_path!= null ?`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movieData.backdrop_path}`:"https://i1.wp.com/www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg?ssl=1"} 
                     alt={movieData.title}/>
                 </div>
                 <div className="right">
