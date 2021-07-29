@@ -55,13 +55,13 @@ const Home = () => {
       };
 
     const freeMoviesPage = (e) => {
-        let page = e.target.id;
+        let page = e.target.value;
         setFreeTowatchPage(page + 1);
         setfreeMovieloader(!freeMovieloader)
     };  
 
     const trendPage = (e) => {
-        let page = e.target.id;
+        let page = e.target.value;
         setTrendingPage(page + 1);
         settrendMovieloader(!trendMovieloader)
     }
