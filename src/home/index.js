@@ -58,18 +58,20 @@ const Home = () => {
         let page = e.target.id;
         setFreeTowatchPage(page + 1);
         setfreeMovieloader(!freeMovieloader)
-    };
+    };  
 
     const trendPage = (e) => {
-        console.log(e.target.id)
         let page = e.target.id;
         setTrendingPage(page + 1);
         settrendMovieloader(!trendMovieloader)
     }
 
+   // console.log(movies[Math.floor(Math.random() * ((movies.length-1) - 0 + 1)) + 0]);
+
     return ( <div>
-        <Topbar/>
-        <Banner/>
+        <Topbar/>{
+            movies && <Banner dynamicBg={movies[Math.floor(Math.random() * ((movies.length-1) - 0 + 1)) + 0]}/>
+        }
         <div style={{paddingTop: "1rem"}} className="column-wrapper">
             <div className="content-wrapper Popular">
                 <div className="column">

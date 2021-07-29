@@ -2,7 +2,7 @@ import React,{ useState} from 'react';
 import { Link } from 'react-router-dom';
 import "./style.css";
 
-const Banner = () => {
+const Banner = ({dynamicBg}) => {
 
   const [search, setsearch] = useState("")
 
@@ -16,9 +16,13 @@ const Banner = () => {
     setsearch("")
   }
 
+  //console.log(dynamicBg);
+
   return ( <div className="banner-wrapper">
-    <div className="banner-bg">
-      <img src="https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/tlEFuIlaxRPXIYVHXbOSAMCfWqk.jpg" alt="banner-img"/>
+    <div className="banner-bg">{
+      dynamicBg &&
+      <img src={`https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)${dynamicBg.backdrop_path}`} alt="banner-img"/>
+    }
       <h2>Welcome.</h2>
       <h3>Millions of movies, TV shows and people to discover. Explore now.</h3>
       <form className="search-wrapper" onSubmit={searchBtn}>
