@@ -25,7 +25,6 @@ const Searchpage = () => {
             
         })
         .catch((err) => console.log(err))
-        console.log(searchquery)
     }, [searchquery])
 
     
@@ -46,8 +45,8 @@ const Searchpage = () => {
                     <Link className="wrapper" style={{display:"flex"}}  to={`/movie/${id}`}>
                     <img style={{width:"100px",objectFit:"cover",display: "inline-block",float:"left",borderRadius:" 1rem 0 0 1rem"
                     }} 
-                    src={`${IMG_PATH}${poster_path}`} 
-                    onError={(e)=>{e.target.onerror = null; e.target.src="https://www.dentzap.co.uk/assets/core/img/default-placeholder.png"}}
+                    src={poster_path!=null ? `${IMG_PATH}${poster_path}`:"https://i1.wp.com/www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg?ssl=1"} 
+                    onError={(e)=>{e.target.onerror = null; e.target.src="https://i1.wp.com/www.slntechnologies.com/wp-content/uploads/2017/08/ef3-placeholder-image.jpg?ssl=1"}}
                     alt={title} title={title}/>
                     <div style={{padding:"0.5rem"}}>
                         <h6 style={{fontSize: "1.3rem",paddingTop: "0.5rem"}}>{title}</h6>

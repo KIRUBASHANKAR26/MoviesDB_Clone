@@ -8,7 +8,6 @@ import "react-circular-progressbar/dist/styles.css";
 import ReactPlayer from "react-player";
 import Topbar from '../topbar';
 import NumberFormat from 'react-number-format';
-import LocaleCode from 'locale-code';
 import Skeleton  from "react-loading-skeleton";
 import Footer from '../footer/index';
 import { css } from "@emotion/react";
@@ -102,8 +101,9 @@ const Moviesdetails = () => {
             </div>:(movieData && 
             <div className="movie-infos">
                 <div className="left">
-                    <img style={{width:"300px"}} src={`${IMG_PATH}/${movieData.poster_path}`} alt={movieData.title} title={movieData.title}/>
-                    <img className="bg-image" src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movieData.backdrop_path}`} alt={movieData.title}/>
+                    <img style={{width:"300px"}} src={movieData.poster_path!= null ?`${IMG_PATH}/${movieData.poster_path}`:"https://www.dentzap.co.uk/assets/core/img/default-placeholder.png"} alt={movieData.title} title={movieData.title}/>
+                    <img className="bg-image" src={movieData.backdrop_path!= null ?`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movieData.backdrop_path}`:"https://www.dentzap.co.uk/assets/core/img/default-placeholder.png"} 
+                    alt={movieData.title}/>
                 </div>
                 <div className="right">
                     <h1 class="movieTitle">{movieData.title}</h1>
@@ -189,8 +189,7 @@ const Moviesdetails = () => {
                     casts.slice(0,count).map((cast,index) => 
                     <div key={index} style={{boxShadow: "0 2px 8px rgb(0 0 0 / 10%)",display: "inline-block",borderRadius: "1rem"}}>
                         <img style={{width: "140px",objectFit: "cover",height: "170px",objectPosition: "top center",borderRadius:"1rem 1rem 0 0"}} 
-                        onError={(e)=>{e.target.onerror = null; e.target.src="https://www.hhcenter.org/wp-content/uploads/2017/02/person-placeholder.jpg"}}
-                        src={`${IMG_PATH}/${cast.profile_path}`} title={cast.name} alt={cast.name}/>
+                        src={cast.profile_path!= null?`${IMG_PATH}/${cast.profile_path}`:"https://www.hhcenter.org/wp-content/uploads/2017/02/person-placeholder.jpg"} title={cast.name} alt={cast.name}/>
                         <div className="profile-info">
                             <p style={{fontWeight: "800",marginBottom: "0.5rem"}}>{cast.name}</p>
                             <p style={{fontSize: "0.8rem"}}>{cast.character}</p>
@@ -203,10 +202,10 @@ const Moviesdetails = () => {
             </div>
             <div>
                 <div className="social-media-wrapper" style={{display:"flex",gap:"1rem",marginBottom:"1.5rem"}}>
-                    <span><a href={`https://www.facebook.com/${socialMedia.facebook_id}`} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer"}} class="fab fa-facebook-square"></i></a></span>
-                    <span><a href={`https://twitter.com/${socialMedia.twitter_id}`} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer"}} class="fab fa-twitter"></i></a></span>
-                    <span><a href={`https://www.instagram.com/${socialMedia.instagram_id}`} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer",borderRight:"1px solid gray",paddingRight:"0.75rem"}} class="fab fa-instagram"></i></a></span>
-                    <span><a href={movieData.homepage} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",transform: "rotate(45deg)",cursor:"pointer"}} class="fas fa-link"></i></a></span>
+                    <span><a href={socialMedia.facebook_id!=null?`https://www.facebook.com/${socialMedia.facebook_id}`:"/#"} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer"}} class="fab fa-facebook-square"></i></a></span>
+                    <span><a href={socialMedia.twitter_id!=null?`https://twitter.com/${socialMedia.twitter_id}`:"/#"} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer"}} class="fab fa-twitter"></i></a></span>
+                    <span><a href={socialMedia.instagram_id!=null?`https://www.instagram.com/${socialMedia.instagram_id}`:"/#"} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",cursor:"pointer",borderRight:"1px solid gray",paddingRight:"0.75rem"}} class="fab fa-instagram"></i></a></span>
+                    <span><a href={movieData.homepage!=null?movieData.homepage:"/#"} rel="noopener noreferrer" target="_blank"><i style={{fontSize:"2rem",transform: "rotate(45deg)",cursor:"pointer"}} class="fas fa-link"></i></a></span>
                 </div>
                 <div>
                     {
@@ -216,7 +215,6 @@ const Moviesdetails = () => {
                             <h6>Status</h6>
                             <p>{movieData.status}</p>
                             <h6>Orginal Language</h6>
-                            {console.log(LocaleCode.getLanguages(['en'])) }
                             <p>English</p>
                             <h6>Budget</h6>
                             <NumberFormat value={movieData.budget} displayType={'text'} thousandSeparator={true} prefix={'$'} />
